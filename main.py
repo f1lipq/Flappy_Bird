@@ -78,6 +78,6 @@ while not exit:
 	#print(f'TOP: {block_height_top}, BOTTOM: {block_height_bottom}')
 	pygame.display.update() 
 
-#f = open("leadboard.txt", "w")
+#f = open("leaderboard.txt.txt", "w")
 #f.write(f'{end()}: {points()} points')
 #f.close
