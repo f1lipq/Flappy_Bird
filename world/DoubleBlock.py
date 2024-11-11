@@ -1,4 +1,4 @@
-from Block import Block
+from .Block import Block
 
 class DoubleBlock:
     def __init__(self, x1, y1, width1, height1, x2, y2, width2, height2):

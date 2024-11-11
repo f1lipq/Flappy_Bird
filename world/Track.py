@@ -1,6 +1,6 @@
 import pygame
 import random
-from DoubleBlock import DoubleBlock
+from .DoubleBlock import DoubleBlock
 
 class Track:
     def __init__(self):

@@ -1,16 +1,15 @@
 import pygame 
 from pygame import mixer 
 import random
-from Bird import Bird
-from Ground import Ground
-from DoubleBlock import DoubleBlock
-from Track import Track
+from world.Bird import Bird
+from world.Ground import Ground
+from world.Track import Track
 
 pygame.init() 
 mixer.init() 
   
 # Loading the song 
-mixer.music.load("videoGame.mp3") 
+mixer.music.load("assets/videoGame.mp3") 
   
 # Setting the volume 
 mixer.music.set_volume(0.7) 
