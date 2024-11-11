@@ -4,6 +4,7 @@ from DoubleBlock import DoubleBlock
 
 class Track:
     def __init__(self):
+        self.vx = -0.4
         self.lower_rand = 50
         self.higher_rand = 150
         self.block_height_top = random.randint(self.lower_rand, self.higher_rand)
@@ -14,10 +15,9 @@ class Track:
         self.block.draw(canvas)
 
     def update(self):
-        self.block.update()
+        self.vx -= 0.000005
+        self.block.update(self.vx)
         if self.block.top_block.x <= -70:
-            self.block.comeback()
-            #block.draw(canvas)
             if self.lower_rand <= 200 and self.higher_rand <= 250:
                 self.lower_rand += 5
                 self.higher_rand += 5

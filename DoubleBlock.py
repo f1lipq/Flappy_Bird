@@ -5,9 +5,9 @@ class DoubleBlock:
         self.top_block = Block(x1, y1, width1, height1)
         self.bottom_block = Block(x2, y2, width2, height2)
 
-    def update(self):
-        self.top_block.update()
-        self.bottom_block.update()
+    def update(self, vx):
+        self.top_block.update(vx)
+        self.bottom_block.update(vx)
 
     def draw(self, canvas):
         self.top_block.draw(canvas)
@@ -17,7 +17,3 @@ class DoubleBlock:
         if bird.rect.colliderect(self.top_block.rect) or bird.rect.colliderect(self.bottom_block.rect):
             return True
         return False
-    
-    def comeback(self):
-        self.top_block.comeback()
-        self.bottom_block.comeback()
