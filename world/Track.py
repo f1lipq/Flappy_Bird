@@ -4,6 +4,7 @@ from .DoubleBlock import DoubleBlock
 
 class Track:
     def __init__(self):
+        self.x = 0
         self.vx = -0.4
         self.lower_rand = 50
         self.higher_rand = 150
@@ -16,6 +17,7 @@ class Track:
 
     def update(self):
         self.vx -= 0.000005
+        self.x += self.vx
         self.block.update(self.vx)
         if self.block.top_block.x <= -70:
             if self.lower_rand <= 200 and self.higher_rand <= 250:
@@ -27,4 +29,9 @@ class Track:
 
     def collide_bird(self, bird):
         return self.block.collide_bird(bird)
+    
+    def get_score(self):
+        points = 0
+        points = -self.x / 500
+        return int(points)
         

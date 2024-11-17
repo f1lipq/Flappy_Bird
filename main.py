@@ -4,6 +4,7 @@ import random
 from world.Bird import Bird
 from world.Ground import Ground
 from world.Track import Track
+from screens.GameOverScreen import GameOverScreen
 
 pygame.init() 
 mixer.init() 
@@ -22,17 +23,13 @@ canvas = pygame.display.set_mode((800,600))
 pygame.display.set_caption("Bird") 
 
 #image = pygame.image.load("flappyBird.jpg") 
-exit = False
+is_exit = False
+is_game_over = False
 
 track = Track()
 bird = Bird()
 ground = Ground()
-
-def points():
-	time = pygame.time.get_ticks()
-	points = 0
-	points = time / 1000
-	return int(points)
+game_over_screen = GameOverScreen()
 
 def end():
 	saveBoolean =  str(input("Do you want to save? (y/n)"))
@@ -42,42 +39,44 @@ def end():
 	elif saveBoolean == 'n':
 		return "Finished"
 
-font = pygame.font.Font('freesansbold.ttf', 32)
-text = font.render(f'Your score: {points()}', True, (0,0,0), (255,255,255))
-textRect = text.get_rect()
+def game_over():
+	print(f'Game over')
+	print(f'Your score:{track.get_score()}')
 
-while not exit: 
+font = pygame.font.Font('freesansbold.ttf', 32)
+
+while not is_exit: 
 	canvas.fill((255,255,255))
-	canvas.blit(text, textRect)
 
 	for event in pygame.event.get(): 
 		if event.type == pygame.QUIT: 
-			exit = True
+			is_exit = True
 			print(f'Finished: {pygame.time.get_ticks()} ms')
-			print(f'Your score:{points()}')
+			print(f'Your score:{track.get_score()}')
 		if event.type == pygame.KEYDOWN and event.key == 32:
 			bird.fly_up()
 
-	bird.update()
-	track.update()
+	if is_game_over == False:
+		bird.update()
+		track.update()
+
+		if bird.rect.colliderect(ground.rect) or track.collide_bird(bird):
+			game_over()
+			is_game_over = True
+
+
 	ground.draw(canvas)
 	bird.draw(canvas)
 	track.draw(canvas)
 
-	if bird.rect.colliderect(ground.rect):
-		print(f'Game over')
-		print(f'Your score:{points()}')
-		exit = True
-	
-	if track.collide_bird(bird):
-		print("Game over")
-		print(f'Your score:{points()}')
-		exit = True
-	
-	text = font.render(f'Your score: {points()}', True, (0,0,0), (255,255,255))
+	if is_game_over == True:
+		game_over_screen.draw(canvas)
+
+	text = font.render(f'Your score: {track.get_score()}', True, (0,0,0), (255,255,255))
+	canvas.blit(text, text.get_rect())
 	#print(f'TOP: {block_height_top}, BOTTOM: {block_height_bottom}')
 	pygame.display.update() 
 
-#f = open("leaderboard.txt.txt", "w")
-#f.write(f'{end()}: {points()} points')
+#f = open("leaderboard.csv", "a")
+#f.write(f'{end()},{points()},points\n')
 #f.close
