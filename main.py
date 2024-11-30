@@ -22,9 +22,14 @@ canvas = pygame.display.set_mode((800,600))
 
 pygame.display.set_caption("Bird") 
 
+# states ---
+PLAY_STATE = "play"
+GAME_OVER_STATE = "game_over"
+FOCUS_STATE = "focus"
+
 #image = pygame.image.load("flappyBird.jpg") 
 is_exit = False
-is_game_over = False
+game_state = FOCUS_STATE
 
 track = Track()
 bird = Bird()
@@ -60,33 +65,36 @@ while not is_exit:
 			print(f'Finished: {pygame.time.get_ticks()} ms')
 			print(f'Your score:{track.get_score()}')
 		if event.type == pygame.KEYDOWN and event.key == 32:
+			if game_state == FOCUS_STATE:
+				game_state = PLAY_STATE
 			bird.fly_up()
-		if is_game_over == True and event.type == pygame.MOUSEBUTTONDOWN:
+		if game_state == GAME_OVER_STATE and event.type == pygame.MOUSEBUTTONDOWN:
 			if game_over_screen.on_restart_click(mouse[0], mouse[1]):
 				print("Restart")
-				is_game_over = False
+				game_state = FOCUS_STATE
 				bird.restart()
 				track.restart()
 
-
-
-	if is_game_over == False:
+	if game_state == PLAY_STATE:
 		bird.update()
 		track.update()
+		text = font.render(f'Your score: {track.get_score()}', True, (0,0,0), (255,255,255))
+		canvas.blit(text, text.get_rect())
 
 		if bird.rect.colliderect(ground.rect) or track.collide_bird(bird):
 			game_over()
-			is_game_over = True
+			game_state = GAME_OVER_STATE
+	elif game_state == FOCUS_STATE:
+		text = font.render(f'Press SPACE to start', True, (0,0,0), (255,255,255))
+		canvas.blit(text, text.get_rect())
 
 	ground.draw(canvas)
 	bird.draw(canvas)
 	track.draw(canvas)
 
-	if is_game_over == True:
+	if game_state == GAME_OVER_STATE:
 		game_over_screen.draw(canvas)
 
-	text = font.render(f'Your score: {track.get_score()}', True, (0,0,0), (255,255,255))
-	canvas.blit(text, text.get_rect())
 	#print(f'TOP: {block_height_top}, BOTTOM: {block_height_bottom}')
 	pygame.display.update() 
 

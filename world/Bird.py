@@ -18,6 +18,6 @@ class Bird:
 		pygame.draw.rect(canvas, (255,0,0), self.rect)
 
 	def restart(self):
-		self.y = 0
+		self.y = 200
 		self.vy = 0
-		self.rect = pygame.Rect(80, 0,60,60)
+		self.rect = pygame.Rect(80, self.y,60,60)
