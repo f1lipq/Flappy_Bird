@@ -4,13 +4,7 @@ from .DoubleBlock import DoubleBlock
 
 class Track:
     def __init__(self):
-        self.x = 0
-        self.vx = -0.4
-        self.lower_rand = 50
-        self.higher_rand = 150
-        self.block_height_top = random.randint(self.lower_rand, self.higher_rand)
-        self.block_height_bottom = random.randint(self.lower_rand, self.higher_rand)
-        self.block = DoubleBlock(1730, 0, 70, self.block_height_top, 1730, 500 - self.block_height_bottom, 70, self.block_height_bottom)
+        self.restart()
 
     def draw(self, canvas):
         self.block.draw(canvas)
@@ -34,4 +28,12 @@ class Track:
         points = 0
         points = -self.x / 500
         return int(points)
-        
+    
+    def restart(self):
+        self.x = 0
+        self.vx = -0.4
+        self.lower_rand = 50
+        self.higher_rand = 150
+        self.block_height_top = random.randint(self.lower_rand, self.higher_rand)
+        self.block_height_bottom = random.randint(self.lower_rand, self.higher_rand)
+        self.block = DoubleBlock(1730, 0, 70, self.block_height_top, 1730, 500 - self.block_height_bottom, 70, self.block_height_bottom)

@@ -2,9 +2,7 @@ import pygame
 
 class Bird:
 	def __init__(self):
-		self.y = 0
-		self.vy = 0
-		self.rect = pygame.Rect(80, 0,60,60)
+		self.restart()
 		
 	def fly_up(self):
 		self.vy = -0.3
@@ -18,3 +16,8 @@ class Bird:
 
 	def draw(self, canvas):
 		pygame.draw.rect(canvas, (255,0,0), self.rect)
+
+	def restart(self):
+		self.y = 0
+		self.vy = 0
+		self.rect = pygame.Rect(80, 0,60,60)

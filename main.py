@@ -31,15 +31,20 @@ bird = Bird()
 ground = Ground()
 game_over_screen = GameOverScreen()
 
+"""
 def end():
+	game_over_screen.score = track.get_score()
+	print(game_over_screen.score)
 	saveBoolean =  str(input("Do you want to save? (y/n)"))
 	if saveBoolean == 'y':
 		username = str(input("Type your username: "))
 		return username
 	elif saveBoolean == 'n':
 		return "Finished"
+"""
 
 def game_over():
+	game_over_screen.score = track.get_score()
 	print(f'Game over')
 	print(f'Your score:{track.get_score()}')
 
@@ -47,6 +52,7 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 
 while not is_exit: 
 	canvas.fill((255,255,255))
+	mouse = pygame.mouse.get_pos()
 
 	for event in pygame.event.get(): 
 		if event.type == pygame.QUIT: 
@@ -55,6 +61,14 @@ while not is_exit:
 			print(f'Your score:{track.get_score()}')
 		if event.type == pygame.KEYDOWN and event.key == 32:
 			bird.fly_up()
+		if is_game_over == True and event.type == pygame.MOUSEBUTTONDOWN:
+			if game_over_screen.on_restart_click(mouse[0], mouse[1]):
+				print("Restart")
+				is_game_over = False
+				bird.restart()
+				track.restart()
+
+
 
 	if is_game_over == False:
 		bird.update()
@@ -63,7 +77,6 @@ while not is_exit:
 		if bird.rect.colliderect(ground.rect) or track.collide_bird(bird):
 			game_over()
 			is_game_over = True
-
 
 	ground.draw(canvas)
 	bird.draw(canvas)
