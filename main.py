@@ -53,6 +53,11 @@ def game_over():
 	print(f'Game over')
 	print(f'Your score:{track.get_score()}')
 
+def restart():
+	print("Restart")
+	bird.restart()
+	track.restart()
+
 font = pygame.font.Font('freesansbold.ttf', 32)
 
 while not is_exit: 
@@ -68,12 +73,16 @@ while not is_exit:
 			if game_state == FOCUS_STATE:
 				game_state = PLAY_STATE
 			bird.fly_up()
+
 		if game_state == GAME_OVER_STATE and event.type == pygame.MOUSEBUTTONDOWN:
-			if game_over_screen.on_restart_click(mouse[0], mouse[1]):
-				print("Restart")
+			if game_over_screen.on_restart_click(mouse[0], mouse[1]) or event.type == pygame.K_RETURN:
+				restart()
 				game_state = FOCUS_STATE
-				bird.restart()
-				track.restart()
+
+		if event.type == pygame.KEYDOWN:
+			if game_state == GAME_OVER_STATE and event.key == pygame.K_RETURN:
+				restart()
+				game_state = FOCUS_STATE
 
 	if game_state == PLAY_STATE:
 		bird.update()
