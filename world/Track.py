@@ -10,7 +10,7 @@ class Track:
         self.block.draw(canvas)
 
     def update(self):
-        self.vx -= 0.000005
+        self.vx -= 0.005
         self.x += self.vx
         self.block.update(self.vx)
         if self.block.top_block.x <= -70:
@@ -31,7 +31,7 @@ class Track:
     
     def restart(self):
         self.x = 0
-        self.vx = -0.4
+        self.vx = -11
         self.lower_rand = 50
         self.higher_rand = 150
         self.block_height_top = random.randint(self.lower_rand, self.higher_rand)

@@ -8,7 +8,8 @@ from screens.GameOverScreen import GameOverScreen
 
 pygame.init() 
 mixer.init() 
-  
+
+""" 
 # Loading the song 
 mixer.music.load("assets/videoGame.mp3") 
   
@@ -17,6 +18,7 @@ mixer.music.set_volume(0.7)
   
 # Start playing the song 
 mixer.music.play() 
+"""
 
 canvas = pygame.display.set_mode((800,600)) 
 
@@ -35,6 +37,9 @@ track = Track()
 bird = Bird()
 ground = Ground()
 game_over_screen = GameOverScreen()
+
+fps = 60
+clock = pygame.time.Clock()
 
 """
 def end():
@@ -97,15 +102,17 @@ while not is_exit:
 		text = font.render(f'Press SPACE to start', True, (0,0,0), (255,255,255))
 		canvas.blit(text, text.get_rect())
 
-	ground.draw(canvas)
-	bird.draw(canvas)
+	ground.draw_background(canvas)
 	track.draw(canvas)
+	ground.draw_ground(canvas)
+	bird.draw(canvas)
 
 	if game_state == GAME_OVER_STATE:
 		game_over_screen.draw(canvas)
 
 	#print(f'TOP: {block_height_top}, BOTTOM: {block_height_bottom}')
-	pygame.display.update() 
+	pygame.display.update()
+	clock.tick(fps)
 
 #f = open("leaderboard.csv", "a")
 #f.write(f'{end()},{points()},points\n')
