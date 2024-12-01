@@ -13,8 +13,8 @@ class Block:
         else:
             self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-        self.top_block_img = pygame.image.load("assets\\top_pipe.png")
-        self.bottom_block_img = pygame.image.load("assets\\bottom_pipe.png")
+        self.top_block_img = pygame.image.load("assets/top_pipe.png")
+        self.bottom_block_img = pygame.image.load("assets/bottom_pipe.png")
 
     def draw(self, canvas):
         if self.is_top:
