@@ -21,6 +21,8 @@ mixer.music.play()
 """
 
 canvas = pygame.display.set_mode((800,600)) 
+pygame_icon = pygame.image.load('./assets/flappyBird.png')
+pygame.display.set_icon(pygame_icon)
 
 pygame.display.set_caption("Bird") 
 
