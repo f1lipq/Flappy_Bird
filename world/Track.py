@@ -1,18 +1,22 @@
 import pygame
 import random
 from .DoubleBlock import DoubleBlock
+from .Ground import Ground
 
 class Track:
     def __init__(self):
         self.restart()
 
     def draw(self, canvas):
+        self.ground.draw_background(canvas)
         self.block.draw(canvas)
+        self.ground.draw_ground(canvas)
 
     def update(self):
         self.vx -= 0.005
         self.x += self.vx
         self.block.update(self.vx)
+        self.ground.update(self.x)
         if self.block.top_block.x <= -70:
             if self.lower_rand <= 200 and self.higher_rand <= 250:
                 self.lower_rand += 5
@@ -30,6 +34,7 @@ class Track:
         return int(points)
     
     def restart(self):
+        self.ground = Ground()
         self.x = 0
         self.vx = -11
         self.lower_rand = 50

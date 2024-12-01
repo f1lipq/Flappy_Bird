@@ -35,7 +35,6 @@ game_state = FOCUS_STATE
 
 track = Track()
 bird = Bird()
-ground = Ground()
 game_over_screen = GameOverScreen()
 
 fps = 60
@@ -95,16 +94,14 @@ while not is_exit:
 		text = font.render(f'Your score: {track.get_score()}', True, (0,0,0), (255,255,255))
 		canvas.blit(text, text.get_rect())
 
-		if bird.rect.colliderect(ground.rect) or track.collide_bird(bird):
+		if bird.rect.colliderect(track.ground.rect) or track.collide_bird(bird):
 			game_over()
 			game_state = GAME_OVER_STATE
 	elif game_state == FOCUS_STATE:
 		text = font.render(f'Press SPACE to start', True, (0,0,0), (255,255,255))
 		canvas.blit(text, text.get_rect())
 
-	ground.draw_background(canvas)
 	track.draw(canvas)
-	ground.draw_ground(canvas)
 	bird.draw(canvas)
 
 	if game_state == GAME_OVER_STATE:
