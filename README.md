@@ -1,4 +1,6 @@
 # Flappy_Bird
+![Game screenshot](./docs/game.png)
+
 [School](https://newtech.edu.pl/krakow/) project 
 
 ## Installation
