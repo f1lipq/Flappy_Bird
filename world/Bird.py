@@ -3,7 +3,7 @@ import pygame
 class Bird:
 	def __init__(self):
 		self.restart()
-		self.flappyBird_img = pygame.image.load("assets\\flappyBird.png")
+		self.flappyBird_img = pygame.image.load("assets/flappyBird.png")
 		
 	def fly_up(self):
 		self.vy = -7

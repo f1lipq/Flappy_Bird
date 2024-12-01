@@ -62,7 +62,7 @@ def restart():
 	bird.restart()
 	track.restart()
 
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.Font('assets/pixel_font.ttf', 32)
 
 while not is_exit: 
 	canvas.fill((255,255,255))
@@ -87,22 +87,22 @@ while not is_exit:
 			if game_state == GAME_OVER_STATE and event.key == pygame.K_RETURN:
 				restart()
 				game_state = FOCUS_STATE
+	track.draw(canvas)
+	bird.draw(canvas)
 
 	if game_state == PLAY_STATE:
 		bird.update()
 		track.update()
-		text = font.render(f'Your score: {track.get_score()}', True, (0,0,0), (255,255,255))
-		canvas.blit(text, text.get_rect())
+		text = font.render(f'Your score: {track.get_score()}', True, (0,0,0), None)
+		canvas.blit(text, text.get_rect(topleft = (20,20)))
 
 		if bird.rect.colliderect(track.ground.rect) or track.collide_bird(bird):
 			game_over()
 			game_state = GAME_OVER_STATE
 	elif game_state == FOCUS_STATE:
-		text = font.render(f'Press SPACE to start', True, (0,0,0), (255,255,255))
-		canvas.blit(text, text.get_rect())
+		text = font.render(f'Press SPACE to start', True, (0,0,0), None)
+		canvas.blit(text, text.get_rect(topleft = (20,20)))
 
-	track.draw(canvas)
-	bird.draw(canvas)
 
 	if game_state == GAME_OVER_STATE:
 		game_over_screen.draw(canvas)
