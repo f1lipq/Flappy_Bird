@@ -19,6 +19,7 @@ mixer.music.set_volume(0.7)
 # Start playing the song 
 mixer.music.play() 
 """
+game_over_sound = pygame.mixer.Sound("./assets/GameOverSound.wav")
 
 canvas = pygame.display.set_mode((800,600)) 
 pygame_icon = pygame.image.load('./assets/flappyBird.png')
@@ -55,6 +56,7 @@ def end():
 """
 
 def game_over():
+	pygame.mixer.find_channel(1).play(game_over_sound)
 	game_over_screen.score = track.get_score()
 	print(f'Game over')
 	print(f'Your score:{track.get_score()}')

@@ -4,8 +4,10 @@ class Bird:
 	def __init__(self):
 		self.restart()
 		self.flappyBird_img = pygame.image.load("assets/flappyBird.png")
+		self.FlyingSound = pygame.mixer.Sound("./assets/FlyingSound.wav")
 		
 	def fly_up(self):
+		pygame.mixer.find_channel(0).play(self.FlyingSound)
 		self.vy = -7
 		self.rotate_angle = 30
 		
