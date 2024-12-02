@@ -5,7 +5,7 @@ from world.Bird import Bird
 from world.Ground import Ground
 from world.Track import Track
 from screens.GameOverScreen import GameOverScreen
-
+from bestScore import BestScore
 pygame.init() 
 mixer.init() 
 
@@ -39,6 +39,7 @@ game_state = FOCUS_STATE
 track = Track()
 bird = Bird()
 game_over_screen = GameOverScreen()
+bestScore = BestScore()
 
 fps = 60
 clock = pygame.time.Clock()
@@ -58,6 +59,8 @@ def end():
 def game_over():
 	pygame.mixer.find_channel(1).play(game_over_sound)
 	game_over_screen.score = track.get_score()
+	bestScore.score = track.get_score()
+	game_over_screen.best = bestScore.check()
 	print(f'Game over')
 	print(f'Your score:{track.get_score()}')
 
@@ -114,7 +117,3 @@ while not is_exit:
 	#print(f'TOP: {block_height_top}, BOTTOM: {block_height_bottom}')
 	pygame.display.update()
 	clock.tick(fps)
-
-#f = open("leaderboard.csv", "a")
-#f.write(f'{end()},{points()},points\n')
-#f.close
