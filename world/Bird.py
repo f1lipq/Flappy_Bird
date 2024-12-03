@@ -29,4 +29,4 @@ class Bird:
 		self.rotate_angle = 0
 		self.y = 200
 		self.vy = 0
-		self.rect = pygame.Rect(80, self.y,60,60)
+		self.rect = pygame.Rect(80, self.y,70,50)
