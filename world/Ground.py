@@ -1,4 +1,5 @@
 import pygame
+import time
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -28,4 +29,4 @@ class Ground:
 
 		self.background_x -= 0.5
 		while self.background_x < - 800:
-			self.x += 800
+			self.background_x += 800
